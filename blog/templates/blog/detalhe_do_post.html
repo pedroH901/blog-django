@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.titulo}}</title>
+</head>
+<body>
+    <a href="{% url 'lista_de_posts' %}">Voltar para a lista de posts</a>
+    <hr>
+    <h1>{{post.titulo}}</h1>
+    {% if post.imagem %}
+        <img src="{{ post.imagem.url }}" alt="{{ post.titulo }}" style="max-width: 100%; height: auto;">
+    {% endif %}
+    <p>Por {{post.autor}} em {{post.data_criacao|date:"d/m/Y H:i"}}</p>
+    <hr>
+    <p>{{post.conteudo|linebreaksbr}}</p>
+</body>
+</html>
