@@ -3,17 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{post.titulo}}</title>
+    <title>{{ post.titulo }}</title>
+    <style>
+        /* Importando fontes do Google para um visual mais elegante */
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+        /* Estilos gerais do corpo da página */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9; /* Um cinza muito claro */
+            color: #444; /* Um cinza escuro, mais suave que o preto */
+            line-height: 1.75;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Container principal do post */
+        .post-container {
+            width: 100%;
+            max-width: 800px; /* Largura máxima para boa legibilidade */
+            background-color: #ffffff;
+            padding: 40px 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            border-top: 5px solid #4a90e2; /* Um detalhe de cor no topo */
+        }
+
+        /* Título do post */
+        .post-title {
+            font-family: 'Lora', serif;
+            font-size: 2.8em; /* Título bem maior */
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        /* Metadados: autor e data */
+        .post-meta {
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        /* Imagem de destaque do post */
+        .post-image {
+            width: 100%; /* Ocupa toda a largura do container */
+            height: auto;
+            border-radius: 8px; /* Bordas levemente arredondadas */
+            margin-bottom: 40px; /* Mais espaço abaixo da imagem */
+            object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+        }
+
+        /* Conteúdo principal do post */
+        .post-content {
+            font-size: 1.1em;
+            text-align: justify; /* Texto justificado para um visual de "livro" */
+        }
+        
+        /* Estilo para o link de "voltar" */
+        .back-link {
+            display: inline-block; /* Permite aplicar padding e margin */
+            margin-top: 40px;
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #e0e0e0;
+            padding: 10px 20px;
+            border-radius: 20px; /* Formato de pílula */
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #4a90e2;
+            color: #fff;
+            border-color: #4a90e2;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
-    <a href="{% url 'lista_de_posts' %}">Voltar para a lista de posts</a>
-    <hr>
-    <h1>{{post.titulo}}</h1>
-    {% if post.imagem %}
-        <img src="{{ post.imagem.url }}" alt="{{ post.titulo }}" style="max-width: 100%; height: auto;">
-    {% endif %}
-    <p>Por {{post.autor}} em {{post.data_criacao|date:"d/m/Y H:i"}}</p>
-    <hr>
-    <p>{{post.conteudo|linebreaksbr}}</p>
+
+    <div class="post-container">
+        
+        <h1 class="post-title">{{ post.titulo }}</h1>
+
+        <p class="post-meta">
+            Por <strong>{{ post.autor }}</strong> em {{ post.data_criacao|date:"d \d\e F \d\e Y" }}
+        </p>
+        
+        {% if post.imagem %}
+            <img class="post-image" src="{{ post.imagem.url }}" alt="{{ post.titulo }}">
+        {% endif %}
+        
+        <div class="post-content">
+            {{ post.conteudo|linebreaksbr }}
+        </div>
+        
+    <a href="{% url 'admin:blog_post_changelist' %}" class="back-link">Voltar para a lista de posts</a>
+
+    </div>
+
 </body>
 </html>

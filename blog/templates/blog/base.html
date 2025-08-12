@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <div class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1><a href="{% url 'lista_de_posts' %}">Blog Mágico</a></h1>
+                    <p>Um lugar para descobrir coisas incríveis.</p>
+                </div>
+                <div>
+                    {% if user.is_authenticated %}
+                        <p>Olá, {{ user.username }}! <a href="{% url 'logout' %}">(Sair)</a></p>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+        </header>
+        
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>

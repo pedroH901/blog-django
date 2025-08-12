@@ -8,7 +8,7 @@
 <body>
     <h1>Bem vindo ao meu blog</h1>
     <hr>
-     {% for post in posts}
+     {% for post in posts %}
      <article>
         <h2><a href="{%url 'detalhe_do_post' pk=post.pk %}"></a></h2>
         <p>Por {{post.autor}} em {{post.data_criacao|date:"d/m/Y"}}</p>
